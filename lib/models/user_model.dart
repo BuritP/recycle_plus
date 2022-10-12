@@ -4,6 +4,13 @@ class EmailModel {
   late String name;
 }
 
+class SponserEmailModel {
+  late String email;
+  late String password;
+  late String name;
+  late String otp;
+}
+
 class UserModel {
   String? id;
   String? email;
@@ -87,12 +94,12 @@ class UserModelV2 {
       };
 
   static UserModelV2 fromJson(Map<String, dynamic> json) => UserModelV2(
-    id: json['id'],
-    email: json['email'],
-    name: json['name'],
-    image: json['image'],
-    address: json['address'],
-    role: json['role'],
-    verify: json['verify'],
-  );
+        id: json['id'],
+        email: json['email'],
+        name: json['name'],
+        image: json['image'],
+        address: json['address'],
+        role: json['role'],
+        verify: json['verify'],
+      );
 }

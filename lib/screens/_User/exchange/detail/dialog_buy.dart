@@ -91,9 +91,9 @@ Future<String> SendToken(
   EthereumAddress address_to = EthereumAddress.fromHex(to);
 
   // //แปลงค่าให้มี 0 จำนวน 18 ตัว
-    final decimal = pow(10, 18);
-    var value = amount * decimal;
-    var bigAmount = BigInt.from(value);
+  final decimal = pow(10, 18);
+  var value = amount * decimal;
+  var bigAmount = BigInt.from(value);
 
   //sign transaction
   var response = await submit(
@@ -133,7 +133,7 @@ showAlertDialog_Buy({
 }) {
   //TODO 1: Cancle Button
   Widget cancelButton(BuildContext context) {
-    return FlatButton(
+    return TextButton(
       child: Text("ยกเลิก", style: Roboto16_B_gray),
       onPressed: () {
         Navigator.of(context).pop();
@@ -143,7 +143,7 @@ showAlertDialog_Buy({
 
 //TODO 2: Continute Button
   Widget continueButton(BuildContext context) {
-    return FlatButton(
+    return TextButton(
       child: (isLoading == true)
           ? const CircularProgressIndicator(color: Colors.green)
           : Text("ยืนยัน", style: Roboto16_B_green),
@@ -225,8 +225,8 @@ GestureTapCallback ConfrimContinue(
     // isLoading = true;
 
     //TODO 1: Send Transaction
-    var txHash =
-        await SendToken(ethClient, price, walletAddress, MainAddress).then((value) {
+    var txHash = await SendToken(ethClient, price, walletAddress, MainAddress)
+        .then((value) {
       transactionEZ = "$value";
       print("Success TXH: $value");
     }).catchError((err) => print("Error smartcontract: $err"));

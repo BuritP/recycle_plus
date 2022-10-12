@@ -56,6 +56,49 @@ class AuthService {
     }
   }
 
+  Future SponserregisterEmail(String email, String password, String otp) async {
+    //TODO try ตรวจสอบโค้ด
+    try {
+      //TODO : Register
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) async {
+        //TODO : อ้างอิง User ปัจจุบันตอนนี้
+        User? SponserEZ = FirebaseAuth.instance.currentUser;
+
+        //TODO : สร้าง Model Database Profile
+        await FirebaseFirestore.instance
+            .collection("Sponser")
+            .doc(SponserEZ?.uid)
+            .set({
+          "id": SponserEZ?.uid,
+          "email": email,
+          "role": "Sponser",
+          "otp": otp
+        });
+        FirebaseFirestore.instance.collection('OTP').doc(SponserEZ?.uid).set({
+          "OTP": otp,
+          "Status": false,
+        });
+      });
+
+      //TODO : Check Error
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        Fluttertoast.showToast(
+          msg: "รหัสผ่านไม่ปลอดภัย",
+          gravity: ToastGravity.CENTER,
+        );
+      } else if (e.code == 'email-already-in-use') {
+        Fluttertoast.showToast(
+          msg: "อีเมลนี้มีอยู่แล้วในระบบ",
+          gravity: ToastGravity.CENTER,
+        );
+      }
+      return "not_work";
+    }
+  }
+
   //TODO 2. Function Login
   Future LoginEmail(String email, String password) async {
     try {

@@ -9,6 +9,7 @@ import 'package:recycle_plus/components/wallet/wallet_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:recycle_plus/screens/_Sponser/body_Sponser_register.dart';
 import 'package:recycle_plus/screens/_User/profile/address/profile_address.dart';
 import 'package:recycle_plus/screens/_User/profile/edit_profile/profile_edit.dart';
 import 'package:recycle_plus/screens/_User/profile/order/order.dart';
@@ -232,7 +233,14 @@ class _Member_ProfileScreenState extends State<Member_ProfileScreen> {
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          SponserRegisterScreen()),
+                                );
+                              },
                             ),
                           ),
                           const SizedBox(height: 15.0),
